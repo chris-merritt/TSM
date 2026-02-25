@@ -96,7 +96,7 @@ function Quality.GetNeededSkill(targetQuality, recipeDifficulty, recipeQuality, 
 	local currentLowerBound = skillPerTargetQuality[minQuality] * recipeDifficulty
 	local currentUpperBound = skillPerTargetQuality[min(minQuality + 1, recipeMaxQuality)] * recipeDifficulty
 	local currentQualityRatio = recipeQuality - minQuality
-	local currentSkill = currentLowerBound + currentQualityRatio * (currentUpperBound - currentLowerBound)
+	local currentSkill = math.ceil(currentLowerBound + currentQualityRatio * (currentUpperBound - currentLowerBound))
 	local targetLowerBound = skillPerTargetQuality[targetQuality] * recipeDifficulty
 	local targetUpperBound = skillPerTargetQuality[min(targetQuality + 1, recipeMaxQuality)] * recipeDifficulty
 	neededSkill = max(targetLowerBound - currentSkill, 0)
