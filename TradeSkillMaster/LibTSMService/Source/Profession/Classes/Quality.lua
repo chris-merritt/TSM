@@ -18,6 +18,7 @@ local private = {
 }
 local DF_MAX_QUALITY_MAT_DIFFICULTY_RATIO = 0.25
 local TWW_MAX_QUALITY_MAT_DIFFICULTY_RATIO = 0.4
+local MID_MAX_QUALITY_MAT_DIFFICULTY_RATIO = 0.4
 local SKILL_PER_TARGET_QUALITY = {
 	[2] = {
 		0,
@@ -51,7 +52,8 @@ function Quality.GetMaxMatContribution(rootCategoryId)
 		return 0
 	end
 	local warWithinRecipe = rootCategoryId > 1897 and rootCategoryId < 2000
-	return warWithinRecipe and TWW_MAX_QUALITY_MAT_DIFFICULTY_RATIO or DF_MAX_QUALITY_MAT_DIFFICULTY_RATIO
+	local midnightRecipe = rootCategoryId > 2000
+	return warWithinRecipe and TWW_MAX_QUALITY_MAT_DIFFICULTY_RATIO or midnightRecipe and MID_MAX_QUALITY_MAT_DIFFICULTY_RATIO or DF_MAX_QUALITY_MAT_DIFFICULTY_RATIO
 end
 
 ---Returns the material contribution value for a given recipe based on the quality and expansion.
