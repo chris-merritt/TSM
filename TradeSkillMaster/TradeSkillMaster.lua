@@ -181,6 +181,21 @@ function TSM.OnInitialize(settingsDB)
 		end
 	end
 
+	-- ContainerLootTracker price source
+	if Addon.IsEnabled("ContainerLootTracker") and CLT_API then
+		pcall(function ()
+			CLT_API:RegisterListener(function ()
+				CustomString.InvalidateCache("CLT")
+			end)
+		end)
+		local PriceFunc = function(itemString)
+			return CLT_API:GetAverageValueTSM(itemString)
+		end
+		if PriceFunc then
+			CustomString.RegisterSource("External", "CLT", "ContainerLootTracker", PriceFunc, CustomString.SOURCE_TYPE.PRICE_DB)
+		end
+	end
+
 	-- CraftSim price source
 	-- TODO CraftSimAPI is not available to check on init
 	if Addon.IsEnabled("CraftSim") then
