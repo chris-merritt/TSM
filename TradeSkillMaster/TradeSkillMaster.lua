@@ -181,6 +181,30 @@ function TSM.OnInitialize(settingsDB)
 		end
 	end
 
+	-- CraftSim price source
+	-- TODO CraftSimAPI is not available to check on init
+	if Addon.IsEnabled("CraftSim") then
+		C_Timer.After(5, function ()
+			local ok = pcall(function ()
+				CraftSimAPI:Register("TradeSkillMaster", "lastCraftingCostUpdate",
+				function()
+					CustomString.InvalidateCache("CraftSim")
+				end)
+			end)
+			local PriceFunc = nil
+			if ok then
+				PriceFunc = function(itemString)
+					local itemLink = ItemInfo.GetLink(itemString)
+					return CraftSimAPI:GetLastCraftingCost(itemLink, itemString)
+				end
+			end
+
+			if PriceFunc then
+				CustomString.RegisterSource("External", "CraftSim", "CraftSim", PriceFunc, CustomString.SOURCE_TYPE.PRICE_DB)
+			end
+		end)
+	end
+
 	-- OribosExchange price sources
 	-- luacheck: globals OEMarketInfo
 	if Addon.IsEnabled("OribosExchange") and OEMarketInfo then
