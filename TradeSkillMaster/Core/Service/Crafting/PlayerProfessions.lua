@@ -65,9 +65,9 @@ function PlayerProfessions.OnInitialize(settingsDB)
 	private.StartPlayerProfessionsThread()
 	private.retryTimer = DelayTimer.New("PLAYER_PROFESSIONS_RETRY", private.PlayerProfessionsSkillUpdate)
 	Event.Register("SKILL_LINES_CHANGED", private.PlayerProfessionsSkillUpdate)
-	if ClientInfo.IsVanillaClassic() or ClientInfo.IsPandaClassic() then
+	if ClientInfo.IsVanillaClassic() then
 		Event.Register("LEARNED_SPELL_IN_TAB", private.StartPlayerProfessionsThread)
-	elseif ClientInfo.IsRetail() or ClientInfo.IsBCClassic() then
+	elseif ClientInfo.IsRetail() or ClientInfo.IsPandaClassic() or ClientInfo.IsBCClassic() then
 		Event.Register("LEARNED_SPELL_IN_SKILL_LINE", private.StartPlayerProfessionsThread)
 	end
 end

@@ -1,5 +1,5 @@
-## v4.14.67 Changes
+## v4.14.68 Changes
 
-* [Retail] Fixed profession quality material ratios.
+* [Classic] Update for 5.5.4
 
 [Known Issues](https://support.tradeskillmaster.com/en_US/known_issues)
