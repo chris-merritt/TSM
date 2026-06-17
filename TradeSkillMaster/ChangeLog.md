@@ -1,5 +1,5 @@
-## v4.14.68 Changes
+## v4.14.69 Changes
 
-* [Classic] Update for 5.5.4
+* [Retail] Update for 12.0.7
 
 [Known Issues](https://support.tradeskillmaster.com/en_US/known_issues)
