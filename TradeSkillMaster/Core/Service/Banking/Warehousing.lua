@@ -22,6 +22,13 @@ function Warehousing.MoveGroupsToBank(callback, groups)
 	TempTable.Release(items)
 end
 
+function Warehousing.MoveGroupsToWarbank(callback, groups)
+	local items = TempTable.Acquire()
+	TSM.Banking.Util.PopulateGroupItemsFromBags(items, groups, WarehousingOperation.GetNumToMoveToWarbank)
+	TSM.Banking.MoveToBank(items, callback)
+	TempTable.Release(items)
+end
+
 function Warehousing.MoveGroupsToBags(callback, groups)
 	local items = TempTable.Acquire()
 	TSM.Banking.Util.PopulateGroupItemsFromOpenBank(items, groups, WarehousingOperation.GetNumToMoveToBags)

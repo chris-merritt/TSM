@@ -98,6 +98,34 @@ function WarehousingOperation.GetNumToMoveToBank(itemString, numHave)
 	return numToMove
 end
 
+---Gets the number of an item to move to the Warbank.
+---@param itemString string The item string
+---@param numHave number The number available to move
+---@return number
+function WarehousingOperation.GetNumToMoveToWarbank(itemString, numHave)
+	local operationSettings = Util.GetFirstOperationByItem(OPERATION_TYPE, itemString)
+	if not operationSettings then
+		return 0
+	end
+	local keepBagQuantity = Util.GetItemPrice(OPERATION_TYPE, itemString, "keepBagQuantity", operationSettings)
+	local moveQuantity = Util.GetItemPrice(OPERATION_TYPE, itemString, "moveQuantity", operationSettings)
+	local keepBankQuantity = Util.GetItemPrice(OPERATION_TYPE, itemString, "keepBankQuantity", operationSettings)
+	if not keepBagQuantity or not moveQuantity then
+		-- This operation isn't valid
+		return 0
+	end
+	local numToMove = numHave
+	local warbankQuantity = TSM_API.GetWarbankQuantity(itemString) or 0
+	numToMove = math.min(numToMove, keepBankQuantity - warbankQuantity)
+	if keepBagQuantity ~= 0 then
+		numToMove = max(numToMove - keepBagQuantity, 0)
+	end
+	if moveQuantity ~= 0 then
+		numToMove = min(numToMove, moveQuantity)
+	end
+	return numToMove
+end
+
 ---Gets the number of an item to move to bags.
 ---@param itemString string The item string
 ---@param numHave number The number available to move
