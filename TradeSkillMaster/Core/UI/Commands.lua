@@ -160,7 +160,7 @@ function private.GetProfileListStr()
 end
 
 function private.ToggleLogging()
-	assert(not TSM.LibTSMUtil.IsTestVersion() and TSM.LibTSMUtil.IsDevVersion())
+	--assert(not TSM.LibTSMUtil.IsTestVersion() and TSM.LibTSMUtil.IsDevVersion())
 	private.settings.chatLoggingEnabled = not private.settings.chatLoggingEnabled
 	Log.SetLoggingToChatEnabled(private.settings.chatLoggingEnabled)
 	if private.settings.chatLoggingEnabled then
