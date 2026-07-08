@@ -286,10 +286,10 @@ end
 ---Gets the total number of free bag slots.
 ---@return number
 function Container.GetTotalFreeBagSlots()
-	if ClientInfo.IsRetail() or ClientInfo.IsPandaClassic() then
-		return C_Container.CalculateTotalNumberOfFreeBagSlots()
-	else
+	if ClientInfo.IsVanillaClassic() then
 		return CalculateTotalNumberOfFreeBagSlots()
+	else
+		return C_Container.CalculateTotalNumberOfFreeBagSlots()
 	end
 end
 

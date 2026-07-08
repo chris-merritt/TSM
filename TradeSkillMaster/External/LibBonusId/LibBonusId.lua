@@ -3,7 +3,7 @@
 --- LibBonusId is provided under the MIT license. See LICENSE.txt for more information.
 
 local Lib = LibStub:NewLibrary("LibBonusId", 1) ---@class LibBonusId
-if not Lib then return end
+if not Lib then return end ---@diagnostic disable-line: redundant-condition
 local private = {
 	data = nil, ---@type BonusIdData
 	bonusIdsTemp = {}, ---@type number[]
@@ -241,12 +241,14 @@ function private.Calculate(itemId, modifierDropLevel, modifierContentTuningId)
 		local midnightOp = bonus.midnight
 		local op = bonus.op
 		if op == "legacyAdd" then
+			assert(bonus.amount)
 			itemLevel = itemLevel + bonus.amount
 		elseif op == "add" then
 			if midnightOp == "force" and not hasMidnightScaling then
 				hasMidnightScaling = true
 				itemLevel = private.GetSquishValue(itemLevel)
 			end
+			assert(bonus.amount)
 			itemLevel = itemLevel + bonus.amount
 		elseif op == "set" then
 			itemLevel = bonus.itemLevel
