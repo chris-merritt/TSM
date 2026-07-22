@@ -286,11 +286,7 @@ end
 ---Gets the total number of free bag slots.
 ---@return number
 function Container.GetTotalFreeBagSlots()
-	if ClientInfo.IsVanillaClassic() then
-		return CalculateTotalNumberOfFreeBagSlots()
-	else
-		return C_Container.CalculateTotalNumberOfFreeBagSlots()
-	end
+	return C_Container.CalculateTotalNumberOfFreeBagSlots()
 end
 
 ---Returns whether or not an item can be deposited into the warbank.
