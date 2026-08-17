@@ -31,6 +31,7 @@ local BUTTON_INFO = {
 }
 local CHARACTER_BINDING_SET = 2
 local MAX_MACRO_LENGTH = 255
+local MAX_MACRO_NUM = ClientInfo.IsRetail() and Constants.MacroConsts.MAX_ACCOUNT_MACROS or MAX_ACCOUNT_MACROS
 
 
 
@@ -233,7 +234,7 @@ function private.CreateButtonOnClick(button)
 		SetBinding(binding)
 	end
 
-	if GetNumMacros() >= MAX_ACCOUNT_MACROS then
+	if GetNumMacros() >= MAX_MACRO_NUM then
 		ChatMessage.PrintUser(L["Could not create macro as you already have too many. Delete one of your existing macros and try again."])
 		return
 	end
